@@ -4,13 +4,17 @@ setlocal enabledelayedexpansion
 rem 使用windows bat脚本，生成一个1MB 的txt文件，文件内容纯文本
 
 rem 设置要生成的文件大小，单位为 MB
-set "expected_file_size_mb=1"
+set "expected_file_size_mb=1.1"
 
 rem 根据 MB 计算目标文件大小，单位为字节
 set /a "target_size_byte=expected_file_size_mb * 1024 * 1024"
 
-rem 设置文件名和路径
-set "output_file=the_file.txt"
+rem 将 expected_file_size_mb 格式化为字符串，以便用作文件名的一部分
+set "file_size_str=%expected_file_size_mb%MB"
+set "file_size_str=!file_size_str: =!"
+
+rem 设置文件名和路径，将文件名与文件大小关联
+set "output_file=!file_size_str!_file.txt"
 
 rem 设置要填充文件的内容
 set "content=Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
